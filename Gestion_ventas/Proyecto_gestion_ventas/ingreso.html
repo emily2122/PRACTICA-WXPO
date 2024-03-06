@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Productos</title>
+   
+    <script>
+        function validar_producto() {
+            var cod_producto = document.getElementById("cod_producto").value;
+            var nom_producto = document.getElementById("nom_producto").value;
+            var precio = document.getElementById("precio").value;
+            var cantidad = document.getElementById("cantidad").value;
+            var cod_categoria = document.getElementById("cod_categoria").value;
+            var fecha_elab = document.getElementById("fecha_elab").value;
+            var fecha_cad = document.getElementById("fecha_cad").value;
+    
+            if (cod_producto == "" || nom_producto == "" || precio == "" || cantidad == "" || cod_categoria == "" || fecha_elab == "" || fecha_cad == "") {
+                alert("Todos los campos son obligatorios");
+                return false;
+            }
+    
+            if (isNaN(precio) || isNaN(cantidad)) {
+                alert("El precio y la cantidad deben ser números");
+                return false;
+            }
+    
+            if (new Date(fecha_elab) > new Date(fecha_cad)) {
+                alert("La fecha de elaboración no puede ser posterior a la fecha de caducidad");
+                return false;
+            }
+    
+            // Si todas las validaciones pasan, podemos enviar el formulario
+            document.getElementById("registro_productos").submit();
+        }
+    </script>
+    
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/Proyecto_gestion_ventas/css/ingreso.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Registro de Productos</h2>
+        <form id="registro_productos" action="guardar_productos.php" method="post">
+            <div class="form-group">
+                <label for="cod_producto">Código de Producto:</label>
+                <input type="text" class="form-control" id="cod_producto" name="cod_producto">
+            </div>
+            <div class="form-group">
+                <label for="nom_producto">Nombre del Producto:</label>
+                <input type="text" class="form-control" id="nom_producto" name="nom_producto">
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="text" class="form-control" id="precio" name="precio">
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="text" class="form-control" id="cantidad" name="cantidad">
+            </div>
+            <div class="form-group">
+                <label for="cod_categoria">Categoria:</label>
+                <input type="text" class="form-control" id="cod_categoria" name="cod_categoria">
+            </div>
+            <div class="form-group">
+                <label for="fecha_elab">Fecha de Elaboración:</label>
+                <input type="date" class="form-control" id="fecha_elab" name="fecha_elab">
+            </div>
+            <div class="form-group">
+                <label for="fecha_cad">Fecha de Caducidad:</label>
+                <input type="date" class="form-control" id="fecha_cad" name="fecha_cad">
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary" onclick="validar_producto()">Guardar Producto</button>
+
+
+            </div>
+        </form>
+    </div>
+    <script src="/js/bootstrap.js"></script>
+</body>
+</html>
